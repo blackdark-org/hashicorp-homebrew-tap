@@ -1,0 +1,68 @@
+{
+  $schema: "https://docs.renovatebot.com/renovate-schema.json",
+  extends: ["config:recommended"],
+
+  // GitHub-releases-sourced formulas outside formula_templater's config.hcl -
+  // our custom managers below only know how to regenerate templater-managed
+  // files, so these are excluded from every manager, not just custom.regex.
+  ignorePaths: ["Formula/copywrite.rb", "Formula/enos.rb"],
+
+  // The built-in homebrew manager only understands GitHub/npm tarball URLs.
+  // It can't parse releases.hashicorp.com URLs and would otherwise error on
+  // every formula. Our own custom.regex managers below own these files.
+  homebrew: {
+    enabled: false,
+  },
+
+  customManagers: [
+    {
+      customType: "regex",
+      description:
+        "Bump the pinned version in each Formula file against the HashiCorp Releases API. packageName encodes '<product>:oss' or '<product>:enterprise' so the custom datasource can pick the right license_class.",
+      managerFilePatterns: ["/^Formula/[^/]+\\.rb$/"],
+      matchStrings: ['(?:^|\\n)\\s*version\\s+"(?<currentValue>[^"]+)"'],
+      depNameTemplate: "{{{packageFile}}}",
+      packageNameTemplate:
+        "{{#if (containsString packageFile '-enterprise.rb')}}{{{replace 'Formula/' '' (replace '-enterprise.rb' '' packageFile)}}}:enterprise{{else}}{{{replace 'Formula/' '' (replace '.rb' '' packageFile)}}}:oss{{/if}}",
+      datasourceTemplate: "custom.hashicorpReleases",
+      versioningTemplate: "loose",
+    },
+    {
+      customType: "regex",
+      description:
+        "Bump the pinned version in each Cask file against the HashiCorp Releases API.",
+      managerFilePatterns: ["/^Casks/hashicorp-[^/]+\\.rb$/"],
+      matchStrings: ['(?:^|\\n)\\s*version\\s+"(?<currentValue>[^"]+)"'],
+      depNameTemplate: "{{{packageFile}}}",
+      packageNameTemplate:
+        "{{{replace 'Casks/hashicorp-' '' (replace '.rb' '' packageFile)}}}:oss",
+      datasourceTemplate: "custom.hashicorpReleases",
+      versioningTemplate: "loose",
+    },
+  ],
+
+  customDatasources: {
+    hashicorpReleases: {
+      defaultRegistryUrlTemplate:
+        "https://api.releases.hashicorp.com/v1/releases/{{#if (containsString packageName ':enterprise')}}{{{replace ':enterprise' '' packageName}}}?license_class=enterprise{{else}}{{{replace ':oss' '' packageName}}}?license_class=oss{{/if}}",
+      format: "json",
+      transformTemplates: [
+        '{"releases": $map($[is_prerelease = false], function($v) { {"version": $v.version, "releaseTimestamp": $v.timestamp_created, "changelogUrl": $v.url_changelog, "sourceUrl": $v.url_source_repository} }), "homepage": $[0].url_project_website, "sourceUrl": $[0].url_source_repository}',
+      ],
+    },
+  },
+
+  packageRules: [
+    {
+      matchDatasources: ["custom.hashicorpReleases"],
+      automerge: true,
+      automergeType: "pr",
+      platformAutomerge: true,
+      prCreation: "immediate",
+      labels: ["automated-version-bump"],
+    },
+  ],
+
+  prConcurrentLimit: 4,
+  branchPrefix: "renovate/",
+}

@@ -1,0 +1,6 @@
+util/formula_templater/formula_templater
+util/formula_templater/function.zip
+
+# Private half of the Renovate sync deploy key - never commit this.
+# Add its content as the TAP_SYNC_DEPLOY_KEY Actions secret instead.
+.github/deploy_key

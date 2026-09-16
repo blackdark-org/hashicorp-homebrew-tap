@@ -1,0 +1,58 @@
+class NomadPack < Formula
+  desc "Nomad Pack"
+  homepage "https://github.com/hashicorp/nomad-pack"
+  version "0.4.2"
+
+  def self.mirror
+    ENV.fetch("HOMEBREW_HASHICORP_TAP_MIRROR", "https://releases.hashicorp.com")
+  end
+
+  if OS.mac? && Hardware::CPU.intel?
+    url "#{self.class.mirror}/nomad-pack/#{version}/nomad-pack_#{version}_darwin_amd64.zip"
+    sha256 "c8a77d76b22c11474b546e1496ca50e544ea3dd2a3b5568e56694c91388040f8"
+  end
+
+  if OS.mac? && Hardware::CPU.arm?
+    url "#{self.class.mirror}/nomad-pack/#{version}/nomad-pack_#{version}_darwin_arm64.zip"
+    sha256 "f79be784281fecc64fa0af4a93bda487b0d1ee152d0dad635b93ce98e77522d7"
+  end
+
+  if OS.linux? && Hardware::CPU.intel?
+    url "#{self.class.mirror}/nomad-pack/#{version}/nomad-pack_#{version}_linux_amd64.zip"
+    sha256 "58399149a2b3944d17294fb5c98b30cd02fc9fd1f8d5275713be3dbc5345bfb4"
+  end
+
+  if OS.linux? && Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
+    url "#{self.class.mirror}/nomad-pack/#{version}/nomad-pack_#{version}_linux_arm64.zip"
+    sha256 "d0e537be563f5c18d7183d20c44388d4bb74c22f5dd3583882e4577e0f77c160"
+  end
+
+  conflicts_with "nomad-pack"
+
+  def install
+    bin.install "nomad-pack"
+
+    # The binary completes itself when invoked with COMP_LINE set, rather than
+    # emitting a script, so these mirror what -autocomplete-install writes to rc files.
+    (bash_completion/"nomad-pack").write "complete -C #{opt_bin}/nomad-pack nomad-pack\n"
+    (zsh_completion/"_nomad-pack").write <<~EOS
+      #compdef nomad-pack
+      local -a matches
+      matches=( ${(f)"$(COMP_LINE="$words" COMP_POINT=$(( 1 + ${#${(j. .)words[1,CURRENT-1]}} + $#PREFIX )) #{opt_bin}/nomad-pack)"} )
+      compadd -Q -S '' -a matches
+    EOS
+    (fish_completion/"nomad-pack.fish").write <<~EOS
+      function __complete_nomad-pack
+          set -lx COMP_LINE (commandline -cp)
+          test -z (commandline -ct)
+          and set COMP_LINE "$COMP_LINE "
+          #{opt_bin}/nomad-pack
+      end
+      complete -f -c nomad-pack -a "(__complete_nomad-pack)"
+    EOS
+  end
+
+  test do
+    system "#{bin}/nomad-pack --version"
+  end
+end
