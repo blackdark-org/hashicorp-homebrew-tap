@@ -68,8 +68,21 @@
       prCreation: "immediate",
       labels: ["automated-version-bump"],
     },
+    {
+      // Homebrew/actions tags as YYYY.MM.DD.N (4 dot-separated components).
+      // Renovate's github-actions version parser only expects major.minor.patch,
+      // so it truncates our pin's comment to YYYY.MM.DD and then fails to find
+      // a digest for that truncated (non-existent) tag - a real Renovate
+      // limitation with this tag shape, not a config mistake on our side.
+      // The SHA pin itself is independently verified against the real tag
+      // (see AGENTS.md); disable digest-churn attempts for this one action.
+      matchDepNames: ["Homebrew/actions"],
+      matchDatasources: ["github-tags"],
+      enabled: false,
+    },
   ],
 
-  prConcurrentLimit: 4,
+  prConcurrentLimit: 0,
+  prHourlyLimit: 0,
   branchPrefix: "renovate/",
 }
