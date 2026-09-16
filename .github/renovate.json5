@@ -21,9 +21,10 @@
         "Bump the pinned version in each Formula file against the HashiCorp Releases API. packageName encodes '<product>:oss' or '<product>:enterprise' so the custom datasource can pick the right license_class.",
       managerFilePatterns: ["/^Formula/[^/]+\\.rb$/"],
       matchStrings: ['(?:^|\\n)\\s*version\\s+"(?<currentValue>[^"]+)"'],
-      depNameTemplate: "{{{packageFile}}}",
+      depNameTemplate:
+        "{{#if (containsString packageFile '-enterprise.rb')}}{{{replace '-enterprise.rb' '' packageFile}}}-enterprise{{else}}{{{replace '.rb' '' packageFile}}}{{/if}}",
       packageNameTemplate:
-        "{{#if (containsString packageFile '-enterprise.rb')}}{{{replace 'Formula/' '' (replace '-enterprise.rb' '' packageFile)}}}:enterprise{{else}}{{{replace 'Formula/' '' (replace '.rb' '' packageFile)}}}:oss{{/if}}",
+        "{{#if (containsString packageFile '-enterprise.rb')}}{{{replace '-enterprise.rb' '' packageFile}}}:enterprise{{else}}{{{replace '.rb' '' packageFile}}}:oss{{/if}}",
       datasourceTemplate: "custom.hashicorpReleases",
       versioningTemplate: "loose",
     },
@@ -33,9 +34,9 @@
         "Bump the pinned version in each Cask file against the HashiCorp Releases API.",
       managerFilePatterns: ["/^Casks/hashicorp-[^/]+\\.rb$/"],
       matchStrings: ['(?:^|\\n)\\s*version\\s+"(?<currentValue>[^"]+)"'],
-      depNameTemplate: "{{{packageFile}}}",
+      depNameTemplate: "{{{replace 'hashicorp-' '' (replace '.rb' '' packageFile)}}}",
       packageNameTemplate:
-        "{{{replace 'Casks/hashicorp-' '' (replace '.rb' '' packageFile)}}}:oss",
+        "{{{replace 'hashicorp-' '' (replace '.rb' '' packageFile)}}}:oss",
       datasourceTemplate: "custom.hashicorpReleases",
       versioningTemplate: "loose",
     },
