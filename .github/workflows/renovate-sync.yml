@@ -30,6 +30,7 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 #v7.0.1
         with:
           ref: ${{ github.head_ref }}
+          fetch-depth: 0
           # ssh-key must stay in git config for the later `git push` step to
           # authenticate - persist-credentials:false would break that push.
           ssh-key: ${{ secrets.TAP_SYNC_DEPLOY_KEY }} # zizmor: ignore[artipacked,secrets-outside-env] key is needed by the push step later in this job; no dedicated Environment for this single-secret, low-traffic workflow
@@ -45,14 +46,23 @@ jobs:
       - name: Regenerate changed Formula/Cask files
         id: regenerate
         run: |
+          set -euo pipefail
           git fetch origin main
           # Renovate only ever touches one dependency per PR branch by default,
           # but handle multiple changed files defensively. copywrite.rb/enos.rb
           # are excluded via ignorePaths in renovate.json5 (not in
           # formula_templater's config.hcl), but skip them here too in case
           # something else touches them on the same branch.
-          changed=$(git diff --name-only origin/main...HEAD -- 'Formula/*.rb' 'Casks/hashicorp-*.rb' \
-            | grep -v -e '^Formula/copywrite\.rb$' -e '^Formula/enos\.rb$' || true)
+          #
+          # fetch-depth:0 above ensures origin/main and HEAD share full history
+          # so this diff can't silently fail (a shallow clone here previously
+          # made `git diff origin/main...HEAD` error with "no merge base",
+          # which the old code swallowed as if nothing had changed - the
+          # sha256/url regeneration below never ran as a result). git diff's
+          # own exit status is captured separately from grep's so a real git
+          # failure isn't mistaken for "grep found nothing".
+          diffed=$(git diff --name-only origin/main...HEAD -- 'Formula/*.rb' 'Casks/hashicorp-*.rb')
+          changed=$(echo "$diffed" | grep -v -e '^Formula/copywrite\.rb$' -e '^Formula/enos\.rb$' || true)
           if [[ -z "$changed" ]]; then
             echo "::notice::No Formula/Cask changes on this branch, nothing to regenerate."
             echo "changed=false" >> "$GITHUB_OUTPUT"
