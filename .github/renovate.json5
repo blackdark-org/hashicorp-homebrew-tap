@@ -48,7 +48,7 @@
         "https://api.releases.hashicorp.com/v1/releases/{{#if (containsString packageName ':enterprise')}}{{{replace ':enterprise' '' packageName}}}?license_class=enterprise{{else}}{{{replace ':oss' '' packageName}}}?license_class=oss{{/if}}",
       format: "json",
       transformTemplates: [
-        '{"releases": $map($[is_prerelease = false], function($v) { {"version": $v.version, "releaseTimestamp": $v.timestamp_created, "changelogUrl": $v.url_changelog, "sourceUrl": $v.url_source_repository} }), "homepage": $[0].url_project_website, "sourceUrl": $[0].url_source_repository}',
+        '{"releases": $map($[is_prerelease = false and (version ~> /^[^+]+(\\+ent)?$/)], function($v) { {"version": $v.version, "releaseTimestamp": $v.timestamp_created, "changelogUrl": $v.url_changelog, "sourceUrl": $v.url_source_repository} }), "homepage": $[0].url_project_website, "sourceUrl": $[0].url_source_repository}',
       ],
     },
   },
