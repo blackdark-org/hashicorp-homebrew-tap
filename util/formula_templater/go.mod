@@ -4,7 +4,7 @@ go 1.20
 
 require (
 	github.com/hashicorp/hcl/v2 v2.16.1
-	github.com/stretchr/testify v1.8.2
+	github.com/stretchr/testify v1.12.1
 )
 
 require (
@@ -15,6 +15,7 @@ require (
 	github.com/mitchellh/go-wordwrap v1.0.1 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/zclconf/go-cty v1.13.0 // indirect
+	go.yaml.in/yaml/v3 v3.0.5 // indirect
 	golang.org/x/text v0.7.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
