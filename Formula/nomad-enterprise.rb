@@ -1,7 +1,7 @@
 class NomadEnterprise < Formula
   desc "Nomad Enterprise"
   homepage "https://www.nomadproject.io/"
-  version "2.0.6+ent.musl"
+  version "2.0.6+ent"
 
   def self.mirror
     ENV.fetch("HOMEBREW_HASHICORP_TAP_MIRROR", "https://releases.hashicorp.com")
