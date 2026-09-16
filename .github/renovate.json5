@@ -2,6 +2,11 @@
   $schema: "https://docs.renovatebot.com/renovate-schema.json",
   extends: ["config:best-practices"],
 
+  // HashiCorp products release on their own cadence; a long gap doesn't mean
+  // abandoned the way it does for a random OSS package, so config:best-practices'
+  // abandonment flagging (added via abandonments:recommended) is just noise here.
+  dependencyDashboardReportAbandonment: false,
+
   // GitHub-releases-sourced formulas outside formula_templater's config.hcl -
   // our custom managers below only know how to regenerate templater-managed
   // files, so these are excluded from every manager, not just custom.regex.
@@ -58,6 +63,7 @@
       matchDatasources: ["custom.hashicorpReleases"],
       automerge: true,
       automergeType: "pr",
+      automergeStrategy: "squash",
       platformAutomerge: true,
       prCreation: "immediate",
       labels: ["automated-version-bump"],
