@@ -1,7 +1,7 @@
 class ConsulEnterprise < Formula
   desc "Consul Enterprise"
   homepage "https://www.consul.io"
-  version "2.0.4+ent"
+  version "2.0.4+ent.fips1403"
 
   def self.mirror
     ENV.fetch("HOMEBREW_HASHICORP_TAP_MIRROR", "https://releases.hashicorp.com")
