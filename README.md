@@ -3,6 +3,12 @@
 A community-maintained fork of [hashicorp/homebrew-tap](https://github.com/hashicorp/homebrew-tap),
 with automated version updates and a configurable download mirror.
 
+This exists because upstream hasn't taken a mirror/proxy option for the
+hardcoded `releases.hashicorp.com` URLs - see
+[hashicorp/homebrew-tap#265](https://github.com/hashicorp/homebrew-tap/issues/265),
+[hashicorp/homebrew-tap#266](https://github.com/hashicorp/homebrew-tap/pull/266), and
+[hashicorp/homebrew-tap#249](https://github.com/hashicorp/homebrew-tap/pull/249).
+
 ## Install
 
 ```sh
@@ -23,7 +29,11 @@ brew install blackdark-org/hashicorp-homebrew-tap/vault
 
 Only the base URL changes; the path structure
 (`/<product>/<version>/<product>_<version>_<os>_<arch>.zip`) is unchanged, so
-the mirror just needs to proxy `releases.hashicorp.com` verbatim.
+the mirror just needs to proxy `releases.hashicorp.com` verbatim. This is the
+same env-var approach proposed upstream in
+[hashicorp/homebrew-tap#266](https://github.com/hashicorp/homebrew-tap/pull/266)
+and [#249](https://github.com/hashicorp/homebrew-tap/pull/249), neither of
+which has been merged.
 
 This tap never hosts binaries itself - it only points at a URL (upstream by
 default, or your mirror). Enterprise-licensed formulae
