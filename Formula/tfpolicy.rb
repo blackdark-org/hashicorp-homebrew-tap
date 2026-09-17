@@ -1,7 +1,7 @@
 class Tfpolicy < Formula
   desc "Terraform Policy"
   homepage "https://developer.hashicorp.com/terraform/policy/reference/cli"
-  version "0.1.0"
+  version "0.3.0"
 
   def self.mirror
     ENV.fetch("HOMEBREW_HASHICORP_TAP_MIRROR", "https://releases.hashicorp.com")
