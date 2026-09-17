@@ -1,3 +1,5 @@
+require_relative "../lib/hashicorp_mirror"
+
 cask "hashicorp-boundary-desktop" do
   version "2.6.3"
 
@@ -7,7 +9,7 @@ cask "hashicorp-boundary-desktop" do
     sha256 arm:   "4b3882b94846806c34d569281b5a864a657af5ca1384cd8aae5721ee55396cae",
            intel: "f42423da63c7dc656aab2245e75aba94f8b420652d0660e2cf1902b82f3c283b"
 
-    url "#{ENV.fetch("HOMEBREW_HASHICORP_TAP_MIRROR", "https://releases.hashicorp.com")}/boundary-desktop/#{version}/boundary-desktop_#{version}_darwin_#{arch}.dmg"
+    url "#{HashicorpMirror.url}/boundary-desktop/#{version}/boundary-desktop_#{version}_darwin_#{arch}.dmg"
 
     app "Boundary.app"
   end

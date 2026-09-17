@@ -1,3 +1,5 @@
+require_relative "../lib/hashicorp_mirror"
+
 cask "hashicorp-vagrant" do
   version "2.4.9"
 
@@ -7,7 +9,7 @@ cask "hashicorp-vagrant" do
     sha256 arm:   "8de08bd435ef8ae0fc5fbd6acefa9c68e62fb898c5ae0fbdacd26853bea9d4d6",
            intel: "8de08bd435ef8ae0fc5fbd6acefa9c68e62fb898c5ae0fbdacd26853bea9d4d6"
 
-    url "#{ENV.fetch("HOMEBREW_HASHICORP_TAP_MIRROR", "https://releases.hashicorp.com")}/vagrant/#{version}/vagrant_#{version}_darwin_#{arch}.dmg"
+    url "#{HashicorpMirror.url}/vagrant/#{version}/vagrant_#{version}_darwin_#{arch}.dmg"
 
     pkg "vagrant.pkg"
 

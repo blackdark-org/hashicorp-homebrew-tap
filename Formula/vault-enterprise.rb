@@ -1,29 +1,27 @@
+require_relative "../lib/hashicorp_mirror"
+
 class VaultEnterprise < Formula
   desc "Vault Enterprise"
   homepage "https://www.vaultproject.io"
   version "2.1.1+ent"
 
-  def self.mirror
-    ENV.fetch("HOMEBREW_HASHICORP_TAP_MIRROR", "https://releases.hashicorp.com")
-  end
-
   if OS.mac? && Hardware::CPU.intel?
-    url "#{mirror}/vault/#{version}/vault_#{version}_darwin_amd64.zip"
+    url "#{HashicorpMirror.url}/vault/#{version}/vault_#{version}_darwin_amd64.zip"
     sha256 "bbb39f3109ddf788f131de7e578f9a3ddb961405cfa54e62e77f736f4f78ad99"
   end
 
   if OS.mac? && Hardware::CPU.arm?
-    url "#{mirror}/vault/#{version}/vault_#{version}_darwin_arm64.zip"
+    url "#{HashicorpMirror.url}/vault/#{version}/vault_#{version}_darwin_arm64.zip"
     sha256 "22049faeb8c9c15aea12246602f5d36863ad9ef66eca8d17fd093ddb22f3f743"
   end
 
   if OS.linux? && Hardware::CPU.intel?
-    url "#{mirror}/vault/#{version}/vault_#{version}_linux_amd64.zip"
+    url "#{HashicorpMirror.url}/vault/#{version}/vault_#{version}_linux_amd64.zip"
     sha256 "10ff6e66ef6f69b7893af48896614eb9288bbab0f1ce74754fc9d3309f29f66f"
   end
 
   if OS.linux? && Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-    url "#{mirror}/vault/#{version}/vault_#{version}_linux_arm64.zip"
+    url "#{HashicorpMirror.url}/vault/#{version}/vault_#{version}_linux_arm64.zip"
     sha256 "652982e6984ba4408345fc2f9c55dd2c3d47b56948ef1d9ca65116ad83e0a7cf"
   end
 

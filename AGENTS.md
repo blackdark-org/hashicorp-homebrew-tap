@@ -18,6 +18,9 @@ See `README.md` for the user-facing pipeline description.
   cd util/formula_templater && go build
   ./formula_templater [-cask] <product> <version> ./config.hcl > ../../Formula/<product>.rb
   ```
+- `lib/hashicorp_mirror.rb` - shared `HashicorpMirror.url` helper, loaded via
+  `require_relative "../lib/hashicorp_mirror"` from every generated formula/cask
+  to avoid duplicating the mirror env-var lookup per file.
 - `.github/renovate.json5` - custom regex managers + a custom datasource
   querying `api.releases.hashicorp.com` directly (no auth needed). See
   "Testing Renovate locally" below before touching this file - the Handlebars/JSONata

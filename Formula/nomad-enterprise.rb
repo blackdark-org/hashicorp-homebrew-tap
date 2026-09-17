@@ -1,29 +1,27 @@
+require_relative "../lib/hashicorp_mirror"
+
 class NomadEnterprise < Formula
   desc "Nomad Enterprise"
   homepage "https://www.nomadproject.io/"
   version "2.0.6+ent"
 
-  def self.mirror
-    ENV.fetch("HOMEBREW_HASHICORP_TAP_MIRROR", "https://releases.hashicorp.com")
-  end
-
   if OS.mac? && Hardware::CPU.intel?
-    url "#{mirror}/nomad/#{version}/nomad_#{version}_darwin_amd64.zip"
+    url "#{HashicorpMirror.url}/nomad/#{version}/nomad_#{version}_darwin_amd64.zip"
     sha256 "e7d300bfba063e09e6185e30822adf217d27657c81e6a1756fb62c098052735e"
   end
 
   if OS.mac? && Hardware::CPU.arm?
-    url "#{mirror}/nomad/#{version}/nomad_#{version}_darwin_arm64.zip"
+    url "#{HashicorpMirror.url}/nomad/#{version}/nomad_#{version}_darwin_arm64.zip"
     sha256 "6d7b323d5ca8069ab2011c4231c0e8a76bbbeff6de17da81d71970d535ba43dd"
   end
 
   if OS.linux? && Hardware::CPU.intel?
-    url "#{mirror}/nomad/#{version}/nomad_#{version}_linux_amd64.zip"
+    url "#{HashicorpMirror.url}/nomad/#{version}/nomad_#{version}_linux_amd64.zip"
     sha256 "64dd2f9a6a99063ef56e7b94ac234a3166d7be178d3a5f83e8292427d2fd8c84"
   end
 
   if OS.linux? && Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-    url "#{mirror}/nomad/#{version}/nomad_#{version}_linux_arm64.zip"
+    url "#{HashicorpMirror.url}/nomad/#{version}/nomad_#{version}_linux_arm64.zip"
     sha256 "70c598c1b03e7da0296ba87adbf16e296514870244696a675f84f7d145d74330"
   end
 

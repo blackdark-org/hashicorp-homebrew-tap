@@ -1,34 +1,32 @@
+require_relative "../lib/hashicorp_mirror"
+
 class Waypoint < Formula
   desc "Waypoint"
   homepage "https://www.waypointproject.io/"
   version "0.11.4"
 
-  def self.mirror
-    ENV.fetch("HOMEBREW_HASHICORP_TAP_MIRROR", "https://releases.hashicorp.com")
-  end
-
   if OS.mac? && Hardware::CPU.intel?
-    url "#{mirror}/waypoint/#{version}/waypoint_#{version}_darwin_amd64.zip"
+    url "#{HashicorpMirror.url}/waypoint/#{version}/waypoint_#{version}_darwin_amd64.zip"
     sha256 "8942a7d00aaf0b39cec05e2f7da8788a2be0f2be0084236d228d031c6e56521f"
   end
 
   if OS.mac? && Hardware::CPU.arm?
-    url "#{mirror}/waypoint/#{version}/waypoint_#{version}_darwin_arm64.zip"
+    url "#{HashicorpMirror.url}/waypoint/#{version}/waypoint_#{version}_darwin_arm64.zip"
     sha256 "c23da6fe2ba4db6f63963ef2e72caa71faae70b4f598d439d6f35d6abb79f557"
   end
 
   if OS.linux? && Hardware::CPU.intel?
-    url "#{mirror}/waypoint/#{version}/waypoint_#{version}_linux_amd64.zip"
+    url "#{HashicorpMirror.url}/waypoint/#{version}/waypoint_#{version}_linux_amd64.zip"
     sha256 "96d314f1bc182a30ca9e93910981fbd4ecf7290763c55d2d4e8ddce2b23abdca"
   end
 
   if OS.linux? && Hardware::CPU.arm? && !Hardware::CPU.is_64_bit?
-    url "#{mirror}/waypoint/#{version}/waypoint_#{version}_linux_arm.zip"
+    url "#{HashicorpMirror.url}/waypoint/#{version}/waypoint_#{version}_linux_arm.zip"
     sha256 "81f9cb034cd8107dc5972130e379559c384249fe068a00653fc11c3bbb98ca31"
   end
 
   if OS.linux? && Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-    url "#{mirror}/waypoint/#{version}/waypoint_#{version}_linux_arm64.zip"
+    url "#{HashicorpMirror.url}/waypoint/#{version}/waypoint_#{version}_linux_arm64.zip"
     sha256 "bbf331be8785a99a0bfcb4707a013355ba58516d0e9b1b78fd8808e4d2213e66"
   end
 
