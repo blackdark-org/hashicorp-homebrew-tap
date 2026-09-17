@@ -1,14 +1,12 @@
+require_relative "../lib/hashicorp_mirror"
+
 class ConsulAws < Formula
   desc "Consul AWS"
   homepage "https://github.com/hashicorp/consul-aws"
   version "0.1.3"
 
-  def self.mirror
-    ENV.fetch("HOMEBREW_HASHICORP_TAP_MIRROR", "https://releases.hashicorp.com")
-  end
-
   if OS.mac?
-    url "#{mirror}/consul-aws/#{version}/consul-aws_#{version}_darwin_amd64.zip"
+    url "#{HashicorpMirror.url}/consul-aws/#{version}/consul-aws_#{version}_darwin_amd64.zip"
     sha256 "41c57011b30233ae972428f2e57f11ee656138b116982bbcb6bf5a3e138e7510"
   end
 
@@ -24,12 +22,12 @@ class ConsulAws < Formula
   end
 
   if OS.linux? && Hardware::CPU.intel?
-    url "#{mirror}/consul-aws/#{version}/consul-aws_#{version}_linux_amd64.zip"
+    url "#{HashicorpMirror.url}/consul-aws/#{version}/consul-aws_#{version}_linux_amd64.zip"
     sha256 "041d14c0219b13f109745bc97818fd235afde2badff6264d9132438d0a03fdf0"
   end
 
   if OS.linux? && Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-    url "#{mirror}/consul-aws/#{version}/consul-aws_#{version}_linux_arm64.zip"
+    url "#{HashicorpMirror.url}/consul-aws/#{version}/consul-aws_#{version}_linux_arm64.zip"
     sha256 "a6a2c3e9e480da2c57da7cfbfc7bfadfcc8a2df654fc3fc92330f255fae497a8"
   end
 

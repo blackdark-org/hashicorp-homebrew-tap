@@ -1,28 +1,26 @@
+require_relative "../lib/hashicorp_mirror"
+
 class {{ .Name }} < Formula
   desc "{{ .Desc }}"
   homepage "{{ .Homepage }}"
   version "{{ .Version }}"
 
-  def self.mirror
-    ENV.fetch("HOMEBREW_HASHICORP_TAP_MIRROR", "https://releases.hashicorp.com")
-  end
-
   {{- if or .Architectures.DarwinAmd64 .Architectures.DarwinArm64 }}
   {{- if and .Architectures.DarwinAmd64 .Architectures.DarwinArm64 }}
 
   if OS.mac? && Hardware::CPU.intel?
-    url "#{mirror}/{{ .Product }}/#{version}/{{ .Product }}_#{version}_darwin_amd64.zip"
+    url "#{HashicorpMirror.url}/{{ .Product }}/#{version}/{{ .Product }}_#{version}_darwin_amd64.zip"
     sha256 "{{ .Architectures.DarwinAmd64SHA }}"
   end
 
   if OS.mac? && Hardware::CPU.arm?
-    url "#{mirror}/{{ .Product }}/#{version}/{{ .Product }}_#{version}_darwin_arm64.zip"
+    url "#{HashicorpMirror.url}/{{ .Product }}/#{version}/{{ .Product }}_#{version}_darwin_arm64.zip"
     sha256 "{{ .Architectures.DarwinArm64SHA }}"
   end
   {{- else }}
 
   if OS.mac?
-    url "#{mirror}/{{ .Product }}/#{version}/{{ .Product }}_#{version}_darwin_amd64.zip"
+    url "#{HashicorpMirror.url}/{{ .Product }}/#{version}/{{ .Product }}_#{version}_darwin_amd64.zip"
     sha256 "{{ .Architectures.DarwinAmd64SHA }}"
   end
 
@@ -52,12 +50,12 @@ class {{ .Name }} < Formula
   {{- if .Architectures.LinuxAmd64 }}
   {{- if eq $fallback "linux_amd64" }}
 
-  url "#{mirror}/{{ .Product }}/#{version}/{{ .Product }}_#{version}_linux_amd64.zip"
+  url "#{HashicorpMirror.url}/{{ .Product }}/#{version}/{{ .Product }}_#{version}_linux_amd64.zip"
   sha256 "{{ .Architectures.LinuxAmd64SHA }}"
   {{- else }}
 
   if OS.linux? && Hardware::CPU.intel?
-    url "#{mirror}/{{ .Product }}/#{version}/{{ .Product }}_#{version}_linux_amd64.zip"
+    url "#{HashicorpMirror.url}/{{ .Product }}/#{version}/{{ .Product }}_#{version}_linux_amd64.zip"
     sha256 "{{ .Architectures.LinuxAmd64SHA }}"
   end
   {{- end }}
@@ -65,12 +63,12 @@ class {{ .Name }} < Formula
   {{- if .Architectures.LinuxArm }}
   {{- if eq $fallback "linux_arm" }}
 
-  url "#{mirror}/{{ .Product }}/#{version}/{{ .Product }}_#{version}_linux_arm.zip"
+  url "#{HashicorpMirror.url}/{{ .Product }}/#{version}/{{ .Product }}_#{version}_linux_arm.zip"
   sha256 "{{ .Architectures.LinuxArmSHA }}"
   {{- else }}
 
   if OS.linux? && Hardware::CPU.arm? && !Hardware::CPU.is_64_bit?
-    url "#{mirror}/{{ .Product }}/#{version}/{{ .Product }}_#{version}_linux_arm.zip"
+    url "#{HashicorpMirror.url}/{{ .Product }}/#{version}/{{ .Product }}_#{version}_linux_arm.zip"
     sha256 "{{ .Architectures.LinuxArmSHA }}"
   end
   {{- end }}
@@ -78,12 +76,12 @@ class {{ .Name }} < Formula
   {{- if .Architectures.LinuxArm64 }}
   {{- if eq $fallback "linux_arm64" }}
 
-  url "#{mirror}/{{ .Product }}/#{version}/{{ .Product }}_#{version}_linux_arm64.zip"
+  url "#{HashicorpMirror.url}/{{ .Product }}/#{version}/{{ .Product }}_#{version}_linux_arm64.zip"
   sha256 "{{ .Architectures.LinuxArm64SHA }}"
   {{- else }}
 
   if OS.linux? && Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-    url "#{mirror}/{{ .Product }}/#{version}/{{ .Product }}_#{version}_linux_arm64.zip"
+    url "#{HashicorpMirror.url}/{{ .Product }}/#{version}/{{ .Product }}_#{version}_linux_arm64.zip"
     sha256 "{{ .Architectures.LinuxArm64SHA }}"
   end
   {{- end }}

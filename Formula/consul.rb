@@ -1,34 +1,32 @@
+require_relative "../lib/hashicorp_mirror"
+
 class Consul < Formula
   desc "Consul"
   homepage "https://www.consul.io"
   version "2.0.4"
 
-  def self.mirror
-    ENV.fetch("HOMEBREW_HASHICORP_TAP_MIRROR", "https://releases.hashicorp.com")
-  end
-
   if OS.mac? && Hardware::CPU.intel?
-    url "#{mirror}/consul/#{version}/consul_#{version}_darwin_amd64.zip"
+    url "#{HashicorpMirror.url}/consul/#{version}/consul_#{version}_darwin_amd64.zip"
     sha256 "d8c1456641dd5cb9e453bfb054e44abd8152d4e13113cd6e2093cb99b4804845"
   end
 
   if OS.mac? && Hardware::CPU.arm?
-    url "#{mirror}/consul/#{version}/consul_#{version}_darwin_arm64.zip"
+    url "#{HashicorpMirror.url}/consul/#{version}/consul_#{version}_darwin_arm64.zip"
     sha256 "1f51416d27cf5404106e6b2d24de60d4a3677d1a99045e38986f0cc23cb78303"
   end
 
   if OS.linux? && Hardware::CPU.intel?
-    url "#{mirror}/consul/#{version}/consul_#{version}_linux_amd64.zip"
+    url "#{HashicorpMirror.url}/consul/#{version}/consul_#{version}_linux_amd64.zip"
     sha256 "7a28033850a24fd411722593931625d8b548a27646c3ab70c1379ea7fd2af423"
   end
 
   if OS.linux? && Hardware::CPU.arm? && !Hardware::CPU.is_64_bit?
-    url "#{mirror}/consul/#{version}/consul_#{version}_linux_arm.zip"
+    url "#{HashicorpMirror.url}/consul/#{version}/consul_#{version}_linux_arm.zip"
     sha256 "bcfd998627f01e683880b9eeaf77762bb2fc1ef9588ab6c23328cebd727e2b57"
   end
 
   if OS.linux? && Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-    url "#{mirror}/consul/#{version}/consul_#{version}_linux_arm64.zip"
+    url "#{HashicorpMirror.url}/consul/#{version}/consul_#{version}_linux_arm64.zip"
     sha256 "8530dd2f92c1f4acddf152a96e2629a89e6f0f19229889d20dbf8092927aa742"
   end
 
