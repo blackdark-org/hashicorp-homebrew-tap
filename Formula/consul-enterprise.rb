@@ -8,27 +8,27 @@ class ConsulEnterprise < Formula
   end
 
   if OS.mac? && Hardware::CPU.intel?
-    url "#{self.class.mirror}/consul/#{version}/consul_#{version}_darwin_amd64.zip"
+    url "#{mirror}/consul/#{version}/consul_#{version}_darwin_amd64.zip"
     sha256 "8184af77b05c614c10b58935de7b9aa9e4e774e8d2f6a161ef75ed089bf1a14e"
   end
 
   if OS.mac? && Hardware::CPU.arm?
-    url "#{self.class.mirror}/consul/#{version}/consul_#{version}_darwin_arm64.zip"
+    url "#{mirror}/consul/#{version}/consul_#{version}_darwin_arm64.zip"
     sha256 "15791a24b58c167e5c2957cdb019b90e75d2d3c4d0fe70fcebc0e0f7a732a14d"
   end
 
   if OS.linux? && Hardware::CPU.intel?
-    url "#{self.class.mirror}/consul/#{version}/consul_#{version}_linux_amd64.zip"
+    url "#{mirror}/consul/#{version}/consul_#{version}_linux_amd64.zip"
     sha256 "ed024cafa7f78e88b7c9336ac9ca0a42bd414e310905960d610e6935ad01a0cc"
   end
 
   if OS.linux? && Hardware::CPU.arm? && !Hardware::CPU.is_64_bit?
-    url "#{self.class.mirror}/consul/#{version}/consul_#{version}_linux_arm.zip"
+    url "#{mirror}/consul/#{version}/consul_#{version}_linux_arm.zip"
     sha256 "8482c08f1c4c88d5b42528eef0ea929c8166103e2a902036923943ce3ec59816"
   end
 
   if OS.linux? && Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-    url "#{self.class.mirror}/consul/#{version}/consul_#{version}_linux_arm64.zip"
+    url "#{mirror}/consul/#{version}/consul_#{version}_linux_arm64.zip"
     sha256 "fd060805ed685f7c6b7ed47bba73e4ed916ea3e2c0a203d63e0e5b5d045bb8a9"
   end
 

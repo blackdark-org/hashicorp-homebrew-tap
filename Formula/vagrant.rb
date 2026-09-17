@@ -7,7 +7,7 @@ class Vagrant < Formula
     ENV.fetch("HOMEBREW_HASHICORP_TAP_MIRROR", "https://releases.hashicorp.com")
   end
 
-  url "#{self.class.mirror}/vagrant/#{version}/vagrant_#{version}_linux_amd64.zip"
+  url "#{mirror}/vagrant/#{version}/vagrant_#{version}_linux_amd64.zip"
   sha256 "77d4d533c82c420b6b594992a902ec43fcd9f50380dc002a599e93fc744f8cfa"
 
   depends_on :linux
