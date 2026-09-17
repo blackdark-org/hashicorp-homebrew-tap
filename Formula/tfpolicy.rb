@@ -9,27 +9,27 @@ class Tfpolicy < Formula
 
   if OS.mac? && Hardware::CPU.intel?
     url "#{self.class.mirror}/tfpolicy/#{version}/tfpolicy_#{version}_darwin_amd64.zip"
-    sha256 "bd317b6c0df941e5385a59482bd9b9ab1fd50382431a1070cfacb35833958c0b"
+    sha256 "28f889605da65a6ab30450984a38fa5a8238678645862947b9e84099cd46eb37"
   end
 
   if OS.mac? && Hardware::CPU.arm?
     url "#{self.class.mirror}/tfpolicy/#{version}/tfpolicy_#{version}_darwin_arm64.zip"
-    sha256 "df6294bbc538ef7eff51819be2671295d721c8de4841ad5b7d4907f58d250394"
+    sha256 "2c1eada37c99ed760dc9c62d4062ecf8df2262dc5824b9042cd73681886a6abe"
   end
 
   if OS.linux? && Hardware::CPU.intel?
     url "#{self.class.mirror}/tfpolicy/#{version}/tfpolicy_#{version}_linux_amd64.zip"
-    sha256 "568c02d03aa8c066935eefd4d3d86a7afbbd040aa2ac47711e4eb37a6a281259"
+    sha256 "d62e2077184326f1c6063e90c4f4497d0cf5ac1fd66bfec5ca35f5dabd757379"
   end
 
   if OS.linux? && Hardware::CPU.arm? && !Hardware::CPU.is_64_bit?
     url "#{self.class.mirror}/tfpolicy/#{version}/tfpolicy_#{version}_linux_arm.zip"
-    sha256 "ba4e3857257901aff50737b9769ee0fa06c2868677869818d45da5e3cf690f8b"
+    sha256 "fe6f5ad976ef25ec4e0a8877c3c4a5ab8d158dadd79345ff7edbc70b199a6e72"
   end
 
   if OS.linux? && Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
     url "#{self.class.mirror}/tfpolicy/#{version}/tfpolicy_#{version}_linux_arm64.zip"
-    sha256 "e31d4a69a973e01049f007e7362c7b59c091468df5584050329ee4ae49154c00"
+    sha256 "b1153abe3b587b61f3b245acc4efa1406a7c1bcc7d1be92ba694349f70d4a8d3"
   end
 
   conflicts_with "tfpolicy"
