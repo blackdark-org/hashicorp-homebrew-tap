@@ -50,6 +50,7 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 #v7.0.1
         with:
           persist-credentials: false
+          fetch-depth: 0
 
       - name: Set up Homebrew
         id: set-up-homebrew
@@ -62,4 +63,51 @@ jobs:
 
       - name: Audit
         run: brew audit --strict --tap=local/tap
+
+      - name: Verify sha256 of changed formulae/casks against the real download
+        if: github.event_name == 'pull_request'
+        env:
+          BASE_REF: ${{ github.event.pull_request.base.ref }}
+        run: |
+          set -euo pipefail
+          git fetch origin "$BASE_REF"
+          changed=$(git diff --name-only "origin/${BASE_REF}...HEAD" -- 'Formula/*.rb' 'Casks/hashicorp-*.rb')
+          if [[ -z "$changed" ]]; then
+            echo "::notice::No Formula/Cask changes on this branch."
+            exit 0
+          fi
+
+          # brew fetch resolves formulae by qualified tap name, which needs a
+          # real `brew tap` registration - the plain symlink used for `brew
+          # audit` above isn't enough for name resolution. Tap straight from
+          # this checkout over file:// so it fetches the files as they exist
+          # right now, not a stale clone.
+          rm -f "$(brew --repository)/../Taps/local/homebrew-tap"
+          brew tap local/tap "file://$GITHUB_WORKSPACE"
+
+          for f in $changed; do
+            case "$f" in
+              Casks/hashicorp-*.rb)
+                cask_token=$(basename "$f" .rb)
+                ;;
+              *)
+                product=$(basename "$f" .rb)
+                ;;
+            esac
+            case "$f" in
+              Casks/*)
+                # Casks are macOS-only (depends_on :macos) so brew fetch --cask
+                # can't run for real on this Linux runner - it always fails with
+                # "not supported on os linux", unrelated to sha256 correctness.
+                # Warn instead of failing the job; verify casks by hand on macOS
+                # before merging, or add a macos-latest runner if this becomes
+                # frequent enough to justify the extra billed minutes.
+                echo "::warning::Cannot verify local/tap/$cask_token sha256 on a Linux runner - casks are macOS-only. Verify manually."
+                ;;
+              *)
+                echo "::notice::brew fetch local/tap/$product (verifies sha256 against the live download)"
+                brew fetch --formula "local/tap/$product"
+                ;;
+            esac
+          done
 
