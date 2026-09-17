@@ -8,22 +8,22 @@ class Nomad < Formula
   end
 
   if OS.mac? && Hardware::CPU.intel?
-    url "#{self.class.mirror}/nomad/#{version}/nomad_#{version}_darwin_amd64.zip"
+    url "#{mirror}/nomad/#{version}/nomad_#{version}_darwin_amd64.zip"
     sha256 "9aae239db6333d82ce2a3a4ea19f8f398c888dee229a21adaebe6e713b83aa96"
   end
 
   if OS.mac? && Hardware::CPU.arm?
-    url "#{self.class.mirror}/nomad/#{version}/nomad_#{version}_darwin_arm64.zip"
+    url "#{mirror}/nomad/#{version}/nomad_#{version}_darwin_arm64.zip"
     sha256 "a76e9a8a63d8e6c62bae942834a32fafa66776657c285c0031da0abe3f87107a"
   end
 
   if OS.linux? && Hardware::CPU.intel?
-    url "#{self.class.mirror}/nomad/#{version}/nomad_#{version}_linux_amd64.zip"
+    url "#{mirror}/nomad/#{version}/nomad_#{version}_linux_amd64.zip"
     sha256 "c6da734081a41d51cadf15ec880d5eab0313093a29d2ee0984ca5ae1cdf867ec"
   end
 
   if OS.linux? && Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-    url "#{self.class.mirror}/nomad/#{version}/nomad_#{version}_linux_arm64.zip"
+    url "#{mirror}/nomad/#{version}/nomad_#{version}_linux_arm64.zip"
     sha256 "6ccc4c25ec0b6b71c30af4df7ae3dfb3f7a0a05173555f94be452d072100cc52"
   end
 

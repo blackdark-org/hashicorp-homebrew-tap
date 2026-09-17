@@ -8,7 +8,7 @@ class ConsulTerraformSync < Formula
   end
 
   if OS.mac?
-    url "#{self.class.mirror}/consul-terraform-sync/#{version}/consul-terraform-sync_#{version}_darwin_amd64.zip"
+    url "#{mirror}/consul-terraform-sync/#{version}/consul-terraform-sync_#{version}_darwin_amd64.zip"
     sha256 "9004d6808e8b6c3f44cde4701c45ae9f0643503ef7ffee96a3c14ef47189a116"
   end
 
@@ -24,17 +24,17 @@ class ConsulTerraformSync < Formula
   end
 
   if OS.linux? && Hardware::CPU.intel?
-    url "#{self.class.mirror}/consul-terraform-sync/#{version}/consul-terraform-sync_#{version}_linux_amd64.zip"
+    url "#{mirror}/consul-terraform-sync/#{version}/consul-terraform-sync_#{version}_linux_amd64.zip"
     sha256 "4536c56a7d8e6e18f9cd4915d70690b27eec95037e9e5f1d1f764b92da5bd4e3"
   end
 
   if OS.linux? && Hardware::CPU.arm? && !Hardware::CPU.is_64_bit?
-    url "#{self.class.mirror}/consul-terraform-sync/#{version}/consul-terraform-sync_#{version}_linux_arm.zip"
+    url "#{mirror}/consul-terraform-sync/#{version}/consul-terraform-sync_#{version}_linux_arm.zip"
     sha256 "ab799fa142b83634deaad63d98c984878f50f1c67c9d345e4b736d5c2e3eaebe"
   end
 
   if OS.linux? && Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-    url "#{self.class.mirror}/consul-terraform-sync/#{version}/consul-terraform-sync_#{version}_linux_arm64.zip"
+    url "#{mirror}/consul-terraform-sync/#{version}/consul-terraform-sync_#{version}_linux_arm64.zip"
     sha256 "e5e93554cf0789f4513078711abe93bb71d5536f8bb722e950fe051f9bde1043"
   end
 

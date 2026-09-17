@@ -8,22 +8,22 @@ class Vault < Formula
   end
 
   if OS.mac? && Hardware::CPU.intel?
-    url "#{self.class.mirror}/vault/#{version}/vault_#{version}_darwin_amd64.zip"
+    url "#{mirror}/vault/#{version}/vault_#{version}_darwin_amd64.zip"
     sha256 "1310ccba498a08fa9bfe09c698f54f38b6d9c2ae45bae08cf91f02bc10d295b6"
   end
 
   if OS.mac? && Hardware::CPU.arm?
-    url "#{self.class.mirror}/vault/#{version}/vault_#{version}_darwin_arm64.zip"
+    url "#{mirror}/vault/#{version}/vault_#{version}_darwin_arm64.zip"
     sha256 "95d100472b726d889ee380c9335191abdf5b3e6f3108cde48f4f962bfea4f009"
   end
 
   if OS.linux? && Hardware::CPU.intel?
-    url "#{self.class.mirror}/vault/#{version}/vault_#{version}_linux_amd64.zip"
+    url "#{mirror}/vault/#{version}/vault_#{version}_linux_amd64.zip"
     sha256 "8aa90f9cea46f541fc7baa3d0ec692fc06afde9a248cc1f2dcac46a567c6f56b"
   end
 
   if OS.linux? && Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-    url "#{self.class.mirror}/vault/#{version}/vault_#{version}_linux_arm64.zip"
+    url "#{mirror}/vault/#{version}/vault_#{version}_linux_arm64.zip"
     sha256 "c2c74e111ffbc83b3d29c6f0c0215a5e53d738c9fad045f7797bcdcde3156067"
   end
 
