@@ -3,7 +3,7 @@ require_relative "../lib/hashicorp_mirror"
 class Packer < Formula
   desc "Packer"
   homepage "https://www.packer.io/"
-  version "1.16.0"
+  version "1.16.1"
 
   if OS.mac? && Hardware::CPU.intel?
     url "#{HashicorpMirror.url}/packer/#{version}/packer_#{version}_darwin_amd64.zip"
