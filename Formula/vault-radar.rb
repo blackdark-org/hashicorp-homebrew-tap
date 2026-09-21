@@ -3,7 +3,7 @@ require_relative "../lib/hashicorp_mirror"
 class VaultRadar < Formula
   desc "Vault Radar"
   homepage "https://developer.hashicorp.com/hcp/docs/vault-radar/cli"
-  version "0.53.0"
+  version "0.54.0"
 
   if OS.mac? && Hardware::CPU.intel?
     url "#{HashicorpMirror.url}/vault-radar/#{version}/vault-radar_#{version}_darwin_amd64.zip"
