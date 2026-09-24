@@ -3,7 +3,7 @@ require_relative "../lib/hashicorp_mirror"
 class Terraform < Formula
   desc "Terraform"
   homepage "https://www.terraform.io/"
-  version "1.16.3"
+  version "1.16.4"
 
   if OS.mac? && Hardware::CPU.intel?
     url "#{HashicorpMirror.url}/terraform/#{version}/terraform_#{version}_darwin_amd64.zip"
