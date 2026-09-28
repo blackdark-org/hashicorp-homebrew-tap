@@ -3,7 +3,7 @@ require_relative "../lib/hashicorp_mirror"
 class ConsulTerraformSync < Formula
   desc "Consul Terraform Sync"
   homepage "https://github.com/hashicorp/consul-terraform-sync"
-  version "0.9.1"
+  version "0.9.2"
 
   if OS.mac?
     url "#{HashicorpMirror.url}/consul-terraform-sync/#{version}/consul-terraform-sync_#{version}_darwin_amd64.zip"
