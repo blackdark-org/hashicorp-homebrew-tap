@@ -3,11 +3,11 @@ require_relative "../lib/hashicorp_mirror"
 class ConsulTerraformSync < Formula
   desc "Consul Terraform Sync"
   homepage "https://github.com/hashicorp/consul-terraform-sync"
-  version "0.9.1"
+  version "0.9.2"
 
   if OS.mac?
     url "#{HashicorpMirror.url}/consul-terraform-sync/#{version}/consul-terraform-sync_#{version}_darwin_amd64.zip"
-    sha256 "9004d6808e8b6c3f44cde4701c45ae9f0643503ef7ffee96a3c14ef47189a116"
+    sha256 "84e923ad4764c50811263cbcba07c1d6a03fcba073442ffe0005d5019e61fbcd"
   end
 
   if OS.mac? && Hardware::CPU.arm?
@@ -23,17 +23,17 @@ class ConsulTerraformSync < Formula
 
   if OS.linux? && Hardware::CPU.intel?
     url "#{HashicorpMirror.url}/consul-terraform-sync/#{version}/consul-terraform-sync_#{version}_linux_amd64.zip"
-    sha256 "4536c56a7d8e6e18f9cd4915d70690b27eec95037e9e5f1d1f764b92da5bd4e3"
+    sha256 "dcb87be8dac18c71e42680a8dabfc3d9013c99d3fe033dec1bf717f28c92e999"
   end
 
   if OS.linux? && Hardware::CPU.arm? && !Hardware::CPU.is_64_bit?
     url "#{HashicorpMirror.url}/consul-terraform-sync/#{version}/consul-terraform-sync_#{version}_linux_arm.zip"
-    sha256 "ab799fa142b83634deaad63d98c984878f50f1c67c9d345e4b736d5c2e3eaebe"
+    sha256 "6389955b9fed74c0bbab8d92492594fe23d7666233799c904299e6374be9082d"
   end
 
   if OS.linux? && Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
     url "#{HashicorpMirror.url}/consul-terraform-sync/#{version}/consul-terraform-sync_#{version}_linux_arm64.zip"
-    sha256 "e5e93554cf0789f4513078711abe93bb71d5536f8bb722e950fe051f9bde1043"
+    sha256 "d2bbcf3451eef9177bda22c8f8c63b82c23b649d5e2a15e3362a692f141d9605"
   end
 
   conflicts_with "consul-terraform-sync"
