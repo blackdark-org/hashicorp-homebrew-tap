@@ -3,7 +3,7 @@ require_relative "../lib/hashicorp_mirror"
 class HcInstall < Formula
   desc "hc-install CLI"
   homepage "https://github.com/hashicorp/hc-install"
-  version "0.9.5"
+  version "0.10.0"
 
   if OS.mac? && Hardware::CPU.intel?
     url "#{HashicorpMirror.url}/hc-install/#{version}/hc-install_#{version}_darwin_amd64.zip"
