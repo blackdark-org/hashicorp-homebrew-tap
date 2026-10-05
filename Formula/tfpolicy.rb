@@ -3,7 +3,7 @@ require_relative "../lib/hashicorp_mirror"
 class Tfpolicy < Formula
   desc "Terraform Policy"
   homepage "https://developer.hashicorp.com/terraform/policy/reference/cli"
-  version "0.3.0"
+  version "0.4.0"
 
   if OS.mac? && Hardware::CPU.intel?
     url "#{HashicorpMirror.url}/tfpolicy/#{version}/tfpolicy_#{version}_darwin_amd64.zip"
