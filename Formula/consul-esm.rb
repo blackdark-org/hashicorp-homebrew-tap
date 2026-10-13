@@ -3,7 +3,7 @@ require_relative "../lib/hashicorp_mirror"
 class ConsulEsm < Formula
   desc "Consul ESM"
   homepage "https://github.com/hashicorp/consul-esm"
-  version "0.11.0"
+  version "0.11.1"
 
   if OS.mac? && Hardware::CPU.intel?
     url "#{HashicorpMirror.url}/consul-esm/#{version}/consul-esm_#{version}_darwin_amd64.zip"
