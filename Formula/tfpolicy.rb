@@ -3,31 +3,31 @@ require_relative "../lib/hashicorp_mirror"
 class Tfpolicy < Formula
   desc "Terraform Policy"
   homepage "https://developer.hashicorp.com/terraform/policy/reference/cli"
-  version "0.4.0"
+  version "0.5.0"
 
   if OS.mac? && Hardware::CPU.intel?
     url "#{HashicorpMirror.url}/tfpolicy/#{version}/tfpolicy_#{version}_darwin_amd64.zip"
-    sha256 "0d3ba8197fcec7fcc472cb93aa4abdfdbeeefb05c2ea772d59486ce2366c4d37"
+    sha256 "07f520a7e9229d067f832f74ac63d4f439d4c1effe9dd8fe3deade18c3c434f9"
   end
 
   if OS.mac? && Hardware::CPU.arm?
     url "#{HashicorpMirror.url}/tfpolicy/#{version}/tfpolicy_#{version}_darwin_arm64.zip"
-    sha256 "429a0805fcf301bab68f66abc3298683485beac0d87253ace489ec6dee5773eb"
+    sha256 "055f5a83cb3ad82a966062f442acb74d4588143678b9fcc3aa2da24f17d989c8"
   end
 
   if OS.linux? && Hardware::CPU.intel?
     url "#{HashicorpMirror.url}/tfpolicy/#{version}/tfpolicy_#{version}_linux_amd64.zip"
-    sha256 "67675d68f052e52d503248d6108346844f0708540a41cfd03be2b4ee22a03052"
+    sha256 "bee5d7e83e196c853bbb7eb46b39a0646d6b044eb1b6dc1fdfaf3a9c9eb6f6df"
   end
 
   if OS.linux? && Hardware::CPU.arm? && !Hardware::CPU.is_64_bit?
     url "#{HashicorpMirror.url}/tfpolicy/#{version}/tfpolicy_#{version}_linux_arm.zip"
-    sha256 "8771746cc5dfe86ff3059d1fa4cd819c8ac888f3fc55207a44a52088ad9116de"
+    sha256 "437e0f21c7e417b5c657f2a5741441ea2d51af56da44a8bd304b5e0123e1457c"
   end
 
   if OS.linux? && Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
     url "#{HashicorpMirror.url}/tfpolicy/#{version}/tfpolicy_#{version}_linux_arm64.zip"
-    sha256 "3c4f617c2bfde00c377435ebd11fa016f68347ee1f692f44aae780cb6135acc1"
+    sha256 "dff844259f41a9d72c55fbad1a55fe45569d405c71aaa694d6e428595a52a902"
   end
 
   conflicts_with "tfpolicy"
