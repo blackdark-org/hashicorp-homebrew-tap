@@ -3,26 +3,26 @@ require_relative "../lib/hashicorp_mirror"
 class VaultRadar < Formula
   desc "Vault Radar"
   homepage "https://developer.hashicorp.com/hcp/docs/vault-radar/cli"
-  version "0.55.0"
+  version "0.55.1"
 
   if OS.mac? && Hardware::CPU.intel?
     url "#{HashicorpMirror.url}/vault-radar/#{version}/vault-radar_#{version}_darwin_amd64.zip"
-    sha256 "3e0b932e7b9a8bfd0d91e8bffce76a4907e1f0239fc3be495deaf9795fca4bfe"
+    sha256 "92ead0d8a3a28ed0ae5168775882f1e7d1ff3f18d32f5b9896a48a79e0e800ee"
   end
 
   if OS.mac? && Hardware::CPU.arm?
     url "#{HashicorpMirror.url}/vault-radar/#{version}/vault-radar_#{version}_darwin_arm64.zip"
-    sha256 "86f7337f170caf5e2f4d9f75378efacc3491e7beaf81c9b17f72314639cad33c"
+    sha256 "7afcf6098f722693562023938414ad2b692672ab515dd44b10b09f286c3875e0"
   end
 
   if OS.linux? && Hardware::CPU.intel?
     url "#{HashicorpMirror.url}/vault-radar/#{version}/vault-radar_#{version}_linux_amd64.zip"
-    sha256 "47b07cbafa43b660152fba2e6a62657f5fd34d8e6aea4a3b425778c0d1bbbaff"
+    sha256 "80b130fa3e2ce46d2aa0f54f2baa415c620427f72f48252e259588d98e6083b8"
   end
 
   if OS.linux? && Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
     url "#{HashicorpMirror.url}/vault-radar/#{version}/vault-radar_#{version}_linux_arm64.zip"
-    sha256 "893cef1ce989a6285cdd29535d078149ce84638d5d312f997b23c2802380f7c4"
+    sha256 "d638a686936e1a2ae6c537ab0e09c0fc9606f3d536fc98a6fd0436b98ce2eb12"
   end
 
   conflicts_with "vault-radar"
