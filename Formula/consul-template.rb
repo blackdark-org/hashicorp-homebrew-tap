@@ -3,7 +3,7 @@ require_relative "../lib/hashicorp_mirror"
 class ConsulTemplate < Formula
   desc "Consul Template"
   homepage "https://github.com/hashicorp/consul-template"
-  version "0.43.0"
+  version "0.43.1"
 
   if OS.mac? && Hardware::CPU.intel?
     url "#{HashicorpMirror.url}/consul-template/#{version}/consul-template_#{version}_darwin_amd64.zip"
