@@ -3,7 +3,7 @@ require_relative "../lib/hashicorp_mirror"
 class ConsulEnterprise < Formula
   desc "Consul Enterprise"
   homepage "https://www.consul.io"
-  version "2.0.4+ent"
+  version "2.1.0+ent"
 
   if OS.mac? && Hardware::CPU.intel?
     url "#{HashicorpMirror.url}/consul/#{version}/consul_#{version}_darwin_amd64.zip"
