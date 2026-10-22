@@ -3,7 +3,7 @@ require_relative "../lib/hashicorp_mirror"
 class ConsulDataplane < Formula
   desc "Consul Dataplane"
   homepage "https://github.com/hashicorp/consul-dataplane"
-  version "2.0.4"
+  version "2.1.0"
 
   if OS.mac? && Hardware::CPU.intel?
     url "#{HashicorpMirror.url}/consul-dataplane/#{version}/consul-dataplane_#{version}_darwin_amd64.zip"
