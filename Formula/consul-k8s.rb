@@ -3,7 +3,7 @@ require_relative "../lib/hashicorp_mirror"
 class ConsulK8s < Formula
   desc "Consul K8s"
   homepage "https://github.com/hashicorp/consul-k8s"
-  version "2.0.4"
+  version "2.1.0"
 
   if OS.mac? && Hardware::CPU.intel?
     url "#{HashicorpMirror.url}/consul-k8s/#{version}/consul-k8s_#{version}_darwin_amd64.zip"
