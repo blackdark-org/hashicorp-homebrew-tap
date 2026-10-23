@@ -3,26 +3,26 @@ require_relative "../lib/hashicorp_mirror"
 class VaultEnterprise < Formula
   desc "Vault Enterprise"
   homepage "https://www.vaultproject.io"
-  version "2.1.1+ent"
+  version "2.2.1+ent"
 
   if OS.mac? && Hardware::CPU.intel?
     url "#{HashicorpMirror.url}/vault/#{version}/vault_#{version}_darwin_amd64.zip"
-    sha256 "bbb39f3109ddf788f131de7e578f9a3ddb961405cfa54e62e77f736f4f78ad99"
+    sha256 "25a92822dfd2c8456fe95707f861cb3986f5702af68c4546a11b1beb7b83ddeb"
   end
 
   if OS.mac? && Hardware::CPU.arm?
     url "#{HashicorpMirror.url}/vault/#{version}/vault_#{version}_darwin_arm64.zip"
-    sha256 "22049faeb8c9c15aea12246602f5d36863ad9ef66eca8d17fd093ddb22f3f743"
+    sha256 "9eb2cfdbebddfc1e141ab984269cbeb5e563d5223d841f1546de42af125c190c"
   end
 
   if OS.linux? && Hardware::CPU.intel?
     url "#{HashicorpMirror.url}/vault/#{version}/vault_#{version}_linux_amd64.zip"
-    sha256 "10ff6e66ef6f69b7893af48896614eb9288bbab0f1ce74754fc9d3309f29f66f"
+    sha256 "bb2c1083cc98b373db353ec2ca2eddb1cf96320ca7c92f52db4e712dd3273ec3"
   end
 
   if OS.linux? && Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
     url "#{HashicorpMirror.url}/vault/#{version}/vault_#{version}_linux_arm64.zip"
-    sha256 "652982e6984ba4408345fc2f9c55dd2c3d47b56948ef1d9ca65116ad83e0a7cf"
+    sha256 "d5a5d10c322b8de5ab44fcdc9820dcb8f4cf07f6aed9aaebcab38c9c7460ab81"
   end
 
   conflicts_with "vault-enterprise"
