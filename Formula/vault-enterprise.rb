@@ -3,7 +3,7 @@ require_relative "../lib/hashicorp_mirror"
 class VaultEnterprise < Formula
   desc "Vault Enterprise"
   homepage "https://www.vaultproject.io"
-  version "2.1.1+ent"
+  version "2.2.1+ent"
 
   if OS.mac? && Hardware::CPU.intel?
     url "#{HashicorpMirror.url}/vault/#{version}/vault_#{version}_darwin_amd64.zip"
