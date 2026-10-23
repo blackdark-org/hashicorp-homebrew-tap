@@ -3,7 +3,7 @@ require_relative "../lib/hashicorp_mirror"
 class Envconsul < Formula
   desc "Env Consul"
   homepage "https://github.com/hashicorp/envconsul"
-  version "0.14.0"
+  version "0.14.1"
 
   if OS.mac? && Hardware::CPU.intel?
     url "#{HashicorpMirror.url}/envconsul/#{version}/envconsul_#{version}_darwin_amd64.zip"
