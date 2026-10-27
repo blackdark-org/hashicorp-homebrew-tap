@@ -1,7 +1,7 @@
 require_relative "../lib/hashicorp_mirror"
 
 cask "hashicorp-boundary-desktop" do
-  version "2.6.3"
+  version "2.7.0"
 
   on_macos do
     arch arm: "arm64", intel: "amd64"
