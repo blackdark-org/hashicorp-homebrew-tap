@@ -3,31 +3,31 @@ require_relative "../lib/hashicorp_mirror"
 class BoundaryEnterprise < Formula
   desc "Boundary Enterprise"
   homepage "https://www.boundaryproject.io/"
-  version "1.0.2+ent"
+  version "1.1.0+ent"
 
   if OS.mac? && Hardware::CPU.intel?
     url "#{HashicorpMirror.url}/boundary/#{version}/boundary_#{version}_darwin_amd64.zip"
-    sha256 "d7b154722d08be2c137fece7745407a413d7e9419a72fd6fcd41578ca30269e9"
+    sha256 "102672d4ef4c7dddc37f72cf48350d2da9e49365a3d428c2a2b17a58e485daec"
   end
 
   if OS.mac? && Hardware::CPU.arm?
     url "#{HashicorpMirror.url}/boundary/#{version}/boundary_#{version}_darwin_arm64.zip"
-    sha256 "faca9be2c8817abf39508cee9fec09b77c36588e1f63585bc00e1a523a43077c"
+    sha256 "babe55c80e22f63423e0d61c79713e7e6c58e766557b2181ccadea0bbcf796b0"
   end
 
   if OS.linux? && Hardware::CPU.intel?
     url "#{HashicorpMirror.url}/boundary/#{version}/boundary_#{version}_linux_amd64.zip"
-    sha256 "d32956ff858cdc60a4309cfc094392547fa67e6dc9267d8e196ab6d88027ecbd"
+    sha256 "919bb79949f701192e75bde512f98fc0c956a5df2e5b87bf443da2af6c524a59"
   end
 
   if OS.linux? && Hardware::CPU.arm? && !Hardware::CPU.is_64_bit?
     url "#{HashicorpMirror.url}/boundary/#{version}/boundary_#{version}_linux_arm.zip"
-    sha256 "6c6fd2de703e9a735df7ab5fa8320f4364e88962e9b196a27c4850f2372c407b"
+    sha256 "d494f31f2ade8e1dd65cc3c51492ba34b4c9d74a964237ba9782b6dbdcbaaeb5"
   end
 
   if OS.linux? && Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
     url "#{HashicorpMirror.url}/boundary/#{version}/boundary_#{version}_linux_arm64.zip"
-    sha256 "975250804d1f08fb1e1020090030e866fb75c41bb7ba3b78a4a0ebe96a0b0e08"
+    sha256 "bcdecb2683c0c60db40867e9459821bbc6bed4084fb3e096ac6b5ef97df78d14"
   end
 
   conflicts_with "boundary-enterprise"
