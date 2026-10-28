@@ -3,7 +3,7 @@ require_relative "../lib/hashicorp_mirror"
 class BoundaryEnterprise < Formula
   desc "Boundary Enterprise"
   homepage "https://www.boundaryproject.io/"
-  version "1.0.2+ent"
+  version "1.1.0+ent"
 
   if OS.mac? && Hardware::CPU.intel?
     url "#{HashicorpMirror.url}/boundary/#{version}/boundary_#{version}_darwin_amd64.zip"
