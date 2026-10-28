@@ -3,7 +3,7 @@ require_relative "../lib/hashicorp_mirror"
 class Hcdiag < Formula
   desc "Hcdiag"
   homepage "https://github.com/hashicorp/hcdiag"
-  version "0.5.13"
+  version "0.5.15"
 
   if OS.mac? && Hardware::CPU.intel?
     url "#{HashicorpMirror.url}/hcdiag/#{version}/hcdiag_#{version}_darwin_amd64.zip"
