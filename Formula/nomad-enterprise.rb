@@ -7,22 +7,22 @@ class NomadEnterprise < Formula
 
   if OS.mac? && Hardware::CPU.intel?
     url "#{HashicorpMirror.url}/nomad/#{version}/nomad_#{version}_darwin_amd64.zip"
-    sha256 "0630acc5868b40c96460dd2a39a17292e7f214ffb6df492e0e070260f3d8b090"
+    sha256 "2339ac7314cf03e0fa8db1d2a6e025196de7a4857f45aa7b33b277675e0762c8"
   end
 
   if OS.mac? && Hardware::CPU.arm?
     url "#{HashicorpMirror.url}/nomad/#{version}/nomad_#{version}_darwin_arm64.zip"
-    sha256 "7d9e5e2a2ef8fd3061d962b467b133e7beb691a65c9ab3365cb19324a1e9567a"
+    sha256 "4c77e095679c5e16365be50c722c32da88490746d24118c9fd9bd88612bd225b"
   end
 
   if OS.linux? && Hardware::CPU.intel?
     url "#{HashicorpMirror.url}/nomad/#{version}/nomad_#{version}_linux_amd64.zip"
-    sha256 "bbd34946a470ad222d646427d9a927ed5533ecf5760b33b60a1f2d4702b52d1b"
+    sha256 "94ec1812b49c577b15cd3b83cfc14597b78d5d984dca3af7d35832735997ef30"
   end
 
   if OS.linux? && Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
     url "#{HashicorpMirror.url}/nomad/#{version}/nomad_#{version}_linux_arm64.zip"
-    sha256 "b34c1ea7b3a8b2f54e3217668e354c53dbf5a5abb348fbf229309fccb9553424"
+    sha256 "40fb915220f6e0ef25b8f6f0993aca186115c3ea544ff8049144b22196b73ce7"
   end
 
   conflicts_with "nomad-enterprise"
