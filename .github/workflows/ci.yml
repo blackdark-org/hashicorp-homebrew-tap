@@ -84,6 +84,7 @@ jobs:
           # right now, not a stale clone.
           rm -f "$(brew --repository)/../Taps/local/homebrew-tap"
           brew tap local/tap "file://$GITHUB_WORKSPACE"
+          brew trust local/tap
 
           for f in $changed; do
             case "$f" in
