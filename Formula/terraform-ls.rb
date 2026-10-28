@@ -3,7 +3,7 @@ require_relative "../lib/hashicorp_mirror"
 class TerraformLs < Formula
   desc "Terraform Language Server"
   homepage "https://github.com/hashicorp/terraform-ls"
-  version "0.39.0"
+  version "0.39.1"
 
   if OS.mac? && Hardware::CPU.intel?
     url "#{HashicorpMirror.url}/terraform-ls/#{version}/terraform-ls_#{version}_darwin_amd64.zip"
