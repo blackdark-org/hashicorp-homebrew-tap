@@ -3,7 +3,7 @@ require_relative "../lib/hashicorp_mirror"
 class Nomad < Formula
   desc "Nomad"
   homepage "https://www.nomadproject.io/"
-  version "2.1.0"
+  version "2.1.1"
 
   if OS.mac? && Hardware::CPU.intel?
     url "#{HashicorpMirror.url}/nomad/#{version}/nomad_#{version}_darwin_amd64.zip"
