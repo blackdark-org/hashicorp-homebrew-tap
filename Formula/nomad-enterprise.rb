@@ -3,26 +3,26 @@ require_relative "../lib/hashicorp_mirror"
 class NomadEnterprise < Formula
   desc "Nomad Enterprise"
   homepage "https://www.nomadproject.io/"
-  version "2.1.0+ent"
+  version "2.1.1+ent"
 
   if OS.mac? && Hardware::CPU.intel?
     url "#{HashicorpMirror.url}/nomad/#{version}/nomad_#{version}_darwin_amd64.zip"
-    sha256 "2339ac7314cf03e0fa8db1d2a6e025196de7a4857f45aa7b33b277675e0762c8"
+    sha256 "4191ce5bfabc5f31286c20adbd2340cbe17b1e5e9aab7ccaa463f69c122ebd18"
   end
 
   if OS.mac? && Hardware::CPU.arm?
     url "#{HashicorpMirror.url}/nomad/#{version}/nomad_#{version}_darwin_arm64.zip"
-    sha256 "4c77e095679c5e16365be50c722c32da88490746d24118c9fd9bd88612bd225b"
+    sha256 "1b67f6a2a2af2f4d1df70581b47f9cc6663c8d57505022da769e2216dd926155"
   end
 
   if OS.linux? && Hardware::CPU.intel?
     url "#{HashicorpMirror.url}/nomad/#{version}/nomad_#{version}_linux_amd64.zip"
-    sha256 "94ec1812b49c577b15cd3b83cfc14597b78d5d984dca3af7d35832735997ef30"
+    sha256 "249756a45b745f9d28d26fd995c068055e224833ff819c014859bf4d5b83d9d8"
   end
 
   if OS.linux? && Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
     url "#{HashicorpMirror.url}/nomad/#{version}/nomad_#{version}_linux_arm64.zip"
-    sha256 "40fb915220f6e0ef25b8f6f0993aca186115c3ea544ff8049144b22196b73ce7"
+    sha256 "6f40e495f46a914d232c7bc25653b0f159d9fc07eb3a6a008d4ec0cb9ce01488"
   end
 
   conflicts_with "nomad-enterprise"
