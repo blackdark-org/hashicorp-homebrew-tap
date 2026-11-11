@@ -3,31 +3,31 @@ require_relative "../lib/hashicorp_mirror"
 class Terraform < Formula
   desc "Terraform"
   homepage "https://www.terraform.io/"
-  version "1.17.1"
+  version "1.17.2"
 
   if OS.mac? && Hardware::CPU.intel?
     url "#{HashicorpMirror.url}/terraform/#{version}/terraform_#{version}_darwin_amd64.zip"
-    sha256 "fde92387cf9c0de74255003c85291f8fbede54585c10d0635ca7a43633d4d171"
+    sha256 "66b472dcc36cf770d83757ed4d002c476174842c05c68637b40a7e99519cf3e1"
   end
 
   if OS.mac? && Hardware::CPU.arm?
     url "#{HashicorpMirror.url}/terraform/#{version}/terraform_#{version}_darwin_arm64.zip"
-    sha256 "b1ecb3fe0d0a0290c1ab6f83d967d43f25da05d0b671ee0fb355252268dce95a"
+    sha256 "da0c7ef278a911347862758e7573a5907365e66485c2637cf5c217c5e227992e"
   end
 
   if OS.linux? && Hardware::CPU.intel?
     url "#{HashicorpMirror.url}/terraform/#{version}/terraform_#{version}_linux_amd64.zip"
-    sha256 "4638628058e71a55212b1c563712eac03b902128f40740f3dc8174df12135061"
+    sha256 "e6f16b2f0b137ee5729caa8c4e79a3bae4ee261acd198a1fcfa8584a6296605b"
   end
 
   if OS.linux? && Hardware::CPU.arm? && !Hardware::CPU.is_64_bit?
     url "#{HashicorpMirror.url}/terraform/#{version}/terraform_#{version}_linux_arm.zip"
-    sha256 "ae74e5eb2f82e3c37f205e479bed89bbdf7da449a3d75b6ae233ab950b4811dc"
+    sha256 "cd4dfed6a2c310f736e33b9e2f3ddcd86c81b392e5d31b51cb55462e6f19e452"
   end
 
   if OS.linux? && Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
     url "#{HashicorpMirror.url}/terraform/#{version}/terraform_#{version}_linux_arm64.zip"
-    sha256 "988e950a1c23058093b0e66ab2d5fb53fc18345ecfbd5871acf51dbac9325edd"
+    sha256 "858e08c181a76b6b223e8c767a8e983922eebe2d062db949a2de66ce040c368c"
   end
 
   conflicts_with "terraform"
