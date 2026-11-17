@@ -4,8 +4,9 @@
     'github>blackdark/renovate-base//default.json5',
   ],
   separateMultipleMajor: true,
-  // HashiCorp releases on its own cadence; abandonment warnings are noise here.
-  dependencyDashboardReportAbandonment: false,
+  dependencyDashboard: {
+    reportAbandonment: false,
+  },
   ignorePaths: [
     'Formula/copywrite.rb',
     'Formula/enos.rb',
