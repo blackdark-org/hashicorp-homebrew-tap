@@ -1,88 +1,82 @@
 {
-  $schema: "https://docs.renovatebot.com/renovate-schema.json",
-  extends: ["config:best-practices"],
-
-  // HashiCorp products release on their own cadence; a long gap doesn't mean
-  // abandoned the way it does for a random OSS package, so config:best-practices'
-  // abandonment flagging (added via abandonments:recommended) is just noise here.
-  dependencyDashboardReportAbandonment: false,
-
-  // GitHub-releases-sourced formulas outside formula_templater's config.hcl -
-  // our custom managers below only know how to regenerate templater-managed
-  // files, so these are excluded from every manager, not just custom.regex.
-  ignorePaths: ["Formula/copywrite.rb", "Formula/enos.rb"],
-
-  // The built-in homebrew manager only understands GitHub/npm tarball URLs.
-  // It can't parse releases.hashicorp.com URLs and would otherwise error on
-  // every formula. Our own custom.regex managers below own these files.
+  $schema: 'https://docs.renovatebot.com/renovate-schema.json',
+  extends: [
+    'config:best-practices',
+  ],
+  dependencyDashboard: {
+    reportAbandonment: false,
+  },
+  ignorePaths: [
+    'Formula/copywrite.rb',
+    'Formula/enos.rb',
+  ],
   homebrew: {
     enabled: false,
   },
-
   customManagers: [
     {
-      customType: "regex",
-      description:
-        "Bump the pinned version in each Formula file against the HashiCorp Releases API. packageName encodes '<product>:oss' or '<product>:enterprise' so the custom datasource can pick the right license_class.",
-      managerFilePatterns: ["/^Formula/[^/]+\\.rb$/"],
-      matchStrings: ['(?:^|\\n)\\s*version\\s+"(?<currentValue>[^"]+)"'],
-      depNameTemplate:
-        "{{#if (containsString packageFile '-enterprise.rb')}}{{{replace '-enterprise.rb' '' packageFile}}}-enterprise{{else}}{{{replace '.rb' '' packageFile}}}{{/if}}",
-      packageNameTemplate:
-        "{{#if (containsString packageFile '-enterprise.rb')}}{{{replace '-enterprise.rb' '' packageFile}}}:enterprise{{else}}{{{replace '.rb' '' packageFile}}}:oss{{/if}}",
-      datasourceTemplate: "custom.hashicorpReleases",
-      versioningTemplate: "loose",
+      customType: 'regex',
+      description: "Bump the pinned version in each Formula file against the HashiCorp Releases API. packageName encodes '<product>:oss' or '<product>:enterprise' so the custom datasource can pick the right license_class.",
+      managerFilePatterns: [
+        '/^Formula/[^/]+\\.rb$/',
+      ],
+      matchStrings: [
+        '(?:^|\\n)\\s*version\\s+"(?<currentValue>[^"]+)"',
+      ],
+      depNameTemplate: "{{#if (containsString packageFile '-enterprise.rb')}}{{{replace '-enterprise.rb' '' packageFile}}}-enterprise{{else}}{{{replace '.rb' '' packageFile}}}{{/if}}",
+      packageNameTemplate: "{{#if (containsString packageFile '-enterprise.rb')}}{{{replace '-enterprise.rb' '' packageFile}}}:enterprise{{else}}{{{replace '.rb' '' packageFile}}}:oss{{/if}}",
+      datasourceTemplate: 'custom.hashicorpReleases',
+      versioningTemplate: 'loose',
     },
     {
-      customType: "regex",
-      description:
-        "Bump the pinned version in each Cask file against the HashiCorp Releases API.",
-      managerFilePatterns: ["/^Casks/hashicorp-[^/]+\\.rb$/"],
-      matchStrings: ['(?:^|\\n)\\s*version\\s+"(?<currentValue>[^"]+)"'],
+      customType: 'regex',
+      description: 'Bump the pinned version in each Cask file against the HashiCorp Releases API.',
+      managerFilePatterns: [
+        '/^Casks/hashicorp-[^/]+\\.rb$/',
+      ],
+      matchStrings: [
+        '(?:^|\\n)\\s*version\\s+"(?<currentValue>[^"]+)"',
+      ],
       depNameTemplate: "{{{replace 'hashicorp-' '' (replace '.rb' '' packageFile)}}}",
-      packageNameTemplate:
-        "{{{replace 'hashicorp-' '' (replace '.rb' '' packageFile)}}}:oss",
-      datasourceTemplate: "custom.hashicorpReleases",
-      versioningTemplate: "loose",
+      packageNameTemplate: "{{{replace 'hashicorp-' '' (replace '.rb' '' packageFile)}}}:oss",
+      datasourceTemplate: 'custom.hashicorpReleases',
+      versioningTemplate: 'loose',
     },
   ],
-
   customDatasources: {
     hashicorpReleases: {
-      defaultRegistryUrlTemplate:
-        "https://api.releases.hashicorp.com/v1/releases/{{#if (containsString packageName ':enterprise')}}{{{replace ':enterprise' '' packageName}}}?license_class=enterprise{{else}}{{{replace ':oss' '' packageName}}}?license_class=oss{{/if}}",
-      format: "json",
+      defaultRegistryUrlTemplate: "https://api.releases.hashicorp.com/v1/releases/{{#if (containsString packageName ':enterprise')}}{{{replace ':enterprise' '' packageName}}}?license_class=enterprise{{else}}{{{replace ':oss' '' packageName}}}?license_class=oss{{/if}}",
+      format: 'json',
       transformTemplates: [
         '{"releases": $map($[is_prerelease = false and (version ~> /^[^+]+(\\+ent)?$/)], function($v) { {"version": $v.version, "releaseTimestamp": $v.timestamp_created, "changelogUrl": $v.url_changelog, "sourceUrl": $v.url_source_repository} }), "homepage": $[0].url_project_website, "sourceUrl": $[0].url_source_repository}',
       ],
     },
   },
-
   packageRules: [
     {
-      matchDatasources: ["custom.hashicorpReleases"],
+      matchDatasources: [
+        'custom.hashicorpReleases',
+      ],
       automerge: true,
-      automergeType: "pr",
-      automergeStrategy: "squash",
+      automergeType: 'pr',
+      automergeStrategy: 'squash',
       platformAutomerge: true,
-      prCreation: "immediate",
-      labels: ["automated-version-bump"],
+      prCreation: 'immediate',
+      labels: [
+        'automated-version-bump',
+      ],
     },
     {
-      // Homebrew/actions tags as YYYY.MM.DD.N (4 dot-separated components).
-      // Renovate's github-actions version parser only expects major.minor.patch,
-      // so it truncates our pin's comment to YYYY.MM.DD and then fails to find
-      // a digest for that truncated (non-existent) tag - a real Renovate
-      // limitation with this tag shape, not a config mistake on our side.
-      // The SHA pin itself is independently verified against the real tag
-      // (see AGENTS.md); disable digest-churn attempts for this one action.
-      matchDepNames: ["Homebrew/actions"],
-      matchDatasources: ["github-tags"],
+      matchDepNames: [
+        'Homebrew/actions',
+      ],
+      matchDatasources: [
+        'github-tags',
+      ],
       enabled: false,
     },
   ],
-
   prConcurrentLimit: 0,
   prHourlyLimit: 0,
-  branchPrefix: "renovate/",
+  branchPrefix: 'renovate/',
 }
