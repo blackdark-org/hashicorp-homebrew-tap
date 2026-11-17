@@ -1,11 +1,11 @@
 {
   $schema: 'https://docs.renovatebot.com/renovate-schema.json',
   extends: [
-    'config:best-practices',
+    'github>blackdark/renovate-base//default.json5',
   ],
-  dependencyDashboard: {
-    reportAbandonment: false,
-  },
+  separateMultipleMajor: true,
+  // HashiCorp releases on its own cadence; abandonment warnings are noise here.
+  dependencyDashboardReportAbandonment: false,
   ignorePaths: [
     'Formula/copywrite.rb',
     'Formula/enos.rb',
